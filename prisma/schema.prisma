@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+model News {
+  id        String   @id @default(uuid())
+  title     String 
+  content  String
+  backgroundImage String
+  author String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tariff {
+  id        String   @id @default(uuid())
+  title     String 
+  speed Int
+  cost Int
+}

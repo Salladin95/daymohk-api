@@ -7,19 +7,36 @@ datasource db {
   url      = env("POSTGRES_URL")
 }
 
-model News {
+model User {
   id        String   @id @default(uuid())
-  title     String 
-  content  String
-  backgroundImage String
-  author String 
+  login     String   @unique()
+  password  String
+  version   Int      @default(1)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  role      Role     @default(ADMIN)
+  News      News[]
+}
+
+model News {
+  id              String   @id @default(uuid())
+  title           String
+  content         String
+  backgroundImage String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  author          User?    @relation(fields: [authorId], references: [id])
+  authorId        String?
 }
 
 model Tariff {
-  id        String   @id @default(uuid())
-  title     String 
+  id    String @id @default(uuid())
+  title String
   speed Int
-  cost Int
+  cost  Int
+}
+
+enum Role {
+  ADMIN
+  MANAGER
 }

@@ -4,6 +4,7 @@ import { UpdateNewsDto } from './dto/update-news.dto';
 
 @Injectable()
 export class NewsService {
+  constructor(private readonly prisma: PrismaService) { }
   create(createNewsDto: CreateNewsDto) {
     return 'This action adds a new news';
   }

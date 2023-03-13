@@ -1,7 +1,7 @@
 import { Transform } from '@nestjs/class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
-class User {
+class NewsEntity {
   @ApiProperty()
   id: string;
 
@@ -14,8 +14,8 @@ class User {
   @ApiProperty()
   backgroundImage: string;
 
-  @ApiProperty({ example: 1 })
-  author: string;
+  @ApiProperty()
+  authorId?: string;
 
   @ApiProperty({ example: 1231245 })
   @Transform(({ value }) => +new Date(value))
@@ -25,9 +25,9 @@ class User {
   @Transform(({ value }) => +new Date(value))
   updatedAt: Date;
 
-  constructor(partial: Partial<User>) {
+  constructor(partial: Partial<NewsEntity>) {
     Object.assign(this, partial);
   }
 }
 
-export { User };
+export { NewsEntity };

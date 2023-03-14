@@ -1,26 +1,39 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTariffDto } from './dto/create-tariff.dto';
 import { UpdateTariffDto } from './dto/update-tariff.dto';
 
 @Injectable()
 export class TariffService {
-  create(createTariffDto: CreateTariffDto) {
-    return 'This action adds a new tariff';
+  constructor(private readonly prisma: PrismaService) { }
+  async create(createTariffDto: CreateTariffDto) {
+    return this.prisma.tariff.create({ data: createTariffDto });
   }
 
-  findAll() {
-    return `This action returns all tariff`;
+  async findAll() {
+    return this.prisma.tariff.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tariff`;
+  async findOne(id: string) {
+    const tariff = await this.prisma.tariff.findUnique({ where: { id } });
+    if (!tariff) {
+      throw new NotFoundException();
+    }
+    return tariff;
   }
 
-  update(id: number, updateTariffDto: UpdateTariffDto) {
-    return `This action updates a #${id} tariff`;
+  async update(id: string, updateTariffDto: UpdateTariffDto) {
+    await this.findOne(id);
+    const updateTariff = await this.prisma.tariff.update({
+      where: { id },
+      data: updateTariffDto,
+    });
+    return updateTariff;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tariff`;
+  async remove(id: string) {
+    await this.findOne(id);
+    const result = await this.prisma.tariff.delete({ where: { id } });
+    return result;
   }
 }

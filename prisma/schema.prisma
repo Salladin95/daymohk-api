@@ -30,13 +30,19 @@ model News {
 }
 
 model Tariff {
-  id    String @id @default(uuid())
+  id    String      @id @default(uuid())
   title String
   speed Int
   cost  Int
+  type  TariffTypes
 }
 
 enum Role {
   ADMIN
   MANAGER
+}
+
+enum TariffTypes {
+  WIRED
+  WIRELESS
 }

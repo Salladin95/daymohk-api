@@ -19,11 +19,37 @@ import { UpdateTariffDto } from './dto/update-tariff.dto';
 export class TariffController {
   constructor(private readonly tariffService: TariffService) { }
 
-  @UsePipes(ValidationPipe)
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  )
   @HttpCode(201)
   @Post()
   create(@Body() createTariffDto: CreateTariffDto) {
     return this.tariffService.create(createTariffDto);
+  }
+
+  @Get('wired')
+  findWired() {
+    return this.tariffService.findWiredAll();
+  }
+
+  @Get('wireLess')
+  findWireLess() {
+    return this.tariffService.findWireLessAll();
+  }
+
+  @Get('wired/:id')
+  findWiredOne(@Param('id', ParseUUIDPipe) id: string) {
+    return this.tariffService.findOneWired(id);
+  }
+
+  @Get('wireLess/:id')
+  findWireLessOne(@Param('id', ParseUUIDPipe) id: string) {
+    return this.tariffService.findOneWireLess(id);
   }
 
   @Get()
@@ -35,8 +61,13 @@ export class TariffController {
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.tariffService.findOne(id);
   }
-
-  @UsePipes(ValidationPipe)
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  )
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe) id: string,

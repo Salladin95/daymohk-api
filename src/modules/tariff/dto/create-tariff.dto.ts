@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsIn, IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { TariffType } from '../entities/tariff.entity';
 
-const TypesOfTariff = ['WIRED', 'WIRELESS'];
+export type TariffType = 'wired' | 'wireLess';
+const TypesOfTariff = ['wired', 'wireLess'];
 export class CreateTariffDto {
   @ApiProperty()
   @IsString()

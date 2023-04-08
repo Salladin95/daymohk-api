@@ -2,7 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { jwtConfig, manualConfig, postgressConfig } from './configs';
+import { DistrictModule } from './modules/district/district.module';
 import { NewsModule } from './modules/news/news.module';
+import { OrderModule } from './modules/order/order.module';
 import { TariffModule } from './modules/tariff/tariff.module';
 
 @Module({
@@ -12,6 +14,8 @@ import { TariffModule } from './modules/tariff/tariff.module';
     }),
     NewsModule,
     TariffModule,
+    DistrictModule,
+    OrderModule,
   ],
   controllers: [],
   providers: [],

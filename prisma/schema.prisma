@@ -9,7 +9,7 @@ datasource db {
 
 model User {
   id        String   @id @default(uuid())
-  login     String   @unique()
+  login     String   @unique
   password  String
   version   Int      @default(1)
   createdAt DateTime @default(now())
@@ -35,6 +35,35 @@ model Tariff {
   speed Int
   cost  Int
   type  TariffTypes
+  Order Order[]
+}
+
+model AccessibleDistrict {
+  id       String  @id @default(uuid())
+  district String
+  Order    Order[]
+}
+
+model Order {
+  id                        String             @id @default(uuid())
+  familyName                String
+  personalName              String
+  lastName                  String
+  gender                    Gender
+  birthday                  String
+  passportDate              String
+  address                   String
+  addressRegistration       String
+  passportSereies           String
+  passportNumber            String
+  passportBranch            String
+  passportMainPagePhoto     String
+  passportRegistrationPhoto String
+  district                  AccessibleDistrict @relation(fields: [districtId], references: [id])
+  districtId                String            
+  tariff                    Tariff             @relation(fields: [tariffId], references: [id])
+  tariffId                  String             
+  status                     OrderStatus         @default(active)
 }
 
 enum Role {
@@ -42,7 +71,17 @@ enum Role {
   MANAGER
 }
 
+enum OrderStatus {
+  active
+  archive
+}
+
+enum Gender {
+  man
+  woman
+}
+
 enum TariffTypes {
-  WIRED
-  WIRELESS
+  wired
+  wireLess
 }

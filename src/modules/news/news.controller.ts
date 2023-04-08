@@ -7,8 +7,6 @@ import {
   Param,
   Delete,
   UsePipes,
-  UseInterceptors,
-  ClassSerializerInterceptor,
   HttpCode,
   ValidationPipe,
   ParseUUIDPipe,
@@ -17,14 +15,19 @@ import { NewsService } from './news.service';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 
-@UseInterceptors(ClassSerializerInterceptor)
 @Controller('news')
 export class NewsController {
   constructor(private readonly newsService: NewsService) { }
 
   @Post()
   @HttpCode(201)
-  @UsePipes(ValidationPipe)
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  )
   create(@Body() createNewsDto: CreateNewsDto) {
     return this.newsService.create(createNewsDto);
   }
@@ -39,8 +42,14 @@ export class NewsController {
     return this.newsService.findOne(id);
   }
 
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  )
   @Put(':id')
-  @UsePipes(ValidationPipe)
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateNewsDto: UpdateNewsDto,

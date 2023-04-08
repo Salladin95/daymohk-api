@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from 'src/prisma/prisma.service';
+import getNotFoundMsg from 'src/utils/getNotFoundMsg';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
-import { NewsEntity } from './entities/news.entity';
 
 @Injectable()
 export class NewsService {
@@ -14,15 +14,15 @@ export class NewsService {
 
   async findAll() {
     const news = await this.prisma.news.findMany();
-    return news.map(this.transform);
+    return news;
   }
 
   async findOne(id: string) {
     const news = await this.prisma.news.findUnique({ where: { id } });
     if (!news) {
-      throw new NotFoundException();
+      throw new NotFoundException(getNotFoundMsg('News'));
     }
-    return this.transform(news);
+    return news;
   }
 
   async update(id: string, updateNewsDto: UpdateNewsDto) {
@@ -38,9 +38,5 @@ export class NewsService {
     await this.findOne(id);
     const result = await this.prisma.news.delete({ where: { id } });
     return result;
-  }
-
-  transform(news: NewsEntity) {
-    return new NewsEntity(news);
   }
 }

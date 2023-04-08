@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-export type TariffType = 'WIRED' | 'WIRELESS';
+import { TariffType } from '../dto/create-tariff.dto';
 
 export class Tariff {
   @ApiProperty()

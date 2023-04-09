@@ -14,7 +14,7 @@ model User {
   version   Int      @default(1)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  role      Role     @default(ADMIN)
+  role      Role     @default(USER)
   News      News[]
 }
 
@@ -68,7 +68,7 @@ model Order {
 
 enum Role {
   ADMIN
-  MANAGER
+  USER
 }
 
 enum OrderStatus {

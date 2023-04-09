@@ -7,7 +7,7 @@ import { UpdateDistrictDto } from './dto/update-district.dto';
 
 @Injectable()
 export class DistrictService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(createDistrictDto: CreateDistrictDto) {
     return this.prisma.accessibleDistrict.create({ data: createDistrictDto });

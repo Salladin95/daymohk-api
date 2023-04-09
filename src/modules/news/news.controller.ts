@@ -17,7 +17,7 @@ import { UpdateNewsDto } from './dto/update-news.dto';
 
 @Controller('news')
 export class NewsController {
-  constructor(private readonly newsService: NewsService) { }
+  constructor(private readonly newsService: NewsService) {}
 
   @Post()
   @HttpCode(201)

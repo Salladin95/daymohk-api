@@ -13,7 +13,7 @@ export class OrderService {
     private readonly prismaService: PrismaService,
     private readonly tariffService: TariffService,
     private readonly districtService: DistrictService,
-  ) { }
+  ) {}
   async create(createOrderDto: CreateOrderDto) {
     await this.tariffService.findOne(createOrderDto.tariffId);
     await this.districtService.findOne(createOrderDto.districtId);

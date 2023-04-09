@@ -20,4 +20,4 @@ import { TariffModule } from './modules/tariff/tariff.module';
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}

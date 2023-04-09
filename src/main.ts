@@ -1,6 +1,7 @@
 import { ConfigService } from '@nestjs/config';
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 
+import { PrismaClientExceptionFilter } from './prisma-client-exception/prisma-client-exception.filter';
 import { ManualConfigEnum } from './configs/manual.config';
 import { PrismaService } from './prisma/prisma.service';
 import { AppModule } from './app.module';
@@ -17,6 +18,9 @@ async function bootstrap() {
 
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
+
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
   await app.listen(port);
   console.log(`server is listening on port: ${port}`);

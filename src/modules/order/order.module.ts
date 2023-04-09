@@ -11,4 +11,4 @@ import { DistrictModule } from '../district/district.module';
   controllers: [OrderController],
   providers: [OrderService, PrismaService],
 })
-export class OrderModule { }
+export class OrderModule {}

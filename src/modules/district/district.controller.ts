@@ -24,7 +24,7 @@ import { UpdateDistrictDto } from './dto/update-district.dto';
 )
 @Controller('district')
 export class DistrictController {
-  constructor(private readonly districtService: DistrictService) { }
+  constructor(private readonly districtService: DistrictService) {}
 
   @HttpCode(201)
   @Post()

@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import getNotFoundMsg from 'src/utils/getNotFoundMsg';
 import { CreateTariffDto } from './dto/create-tariff.dto';
@@ -6,7 +11,7 @@ import { UpdateTariffDto } from './dto/update-tariff.dto';
 
 @Injectable()
 export class TariffService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
   async create(createTariffDto: CreateTariffDto) {
     return this.prisma.tariff.create({ data: createTariffDto });
   }
@@ -33,8 +38,15 @@ export class TariffService {
 
   async remove(id: string) {
     await this.findOne(id);
-    const result = await this.prisma.tariff.delete({ where: { id } });
-    return result;
+    try {
+      const result = await this.prisma.tariff.delete({ where: { id } });
+      return result;
+    } catch (err) {
+      if (err instanceof Prisma.PrismaClientKnownRequestError) {
+        console.log(err.name);
+        throw new BadRequestException(err.message);
+      }
+    }
   }
 
   async findWiredAll() {

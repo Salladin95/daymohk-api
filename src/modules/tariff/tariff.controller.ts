@@ -17,7 +17,7 @@ import { UpdateTariffDto } from './dto/update-tariff.dto';
 
 @Controller('tariff')
 export class TariffController {
-  constructor(private readonly tariffService: TariffService) { }
+  constructor(private readonly tariffService: TariffService) {}
 
   @UsePipes(
     new ValidationPipe({

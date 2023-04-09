@@ -5,7 +5,7 @@ services:
   db:
     container_name: postgres-db
     image: postgres-db
-    build: .
+    build: ./db
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
     environment:

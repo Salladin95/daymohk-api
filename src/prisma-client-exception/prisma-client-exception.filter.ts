@@ -20,6 +20,14 @@ export class PrismaClientExceptionFilter extends BaseExceptionFilter {
         });
         break;
       }
+      case 'P2003': {
+        const status = HttpStatus.FORBIDDEN;
+        response.status(status).json({
+          statusCode: status,
+          message: 'Other instances are depending on this instance.',
+        });
+        break;
+      }
       default:
         // default 500 error code
         super.catch(exception, host);

@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('ADMIN', 'MANAGER');
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER');
 
 -- CreateEnum
 CREATE TYPE "OrderStatus" AS ENUM ('active', 'archive');
@@ -18,7 +18,7 @@ CREATE TABLE "User" (
     "version" INTEGER NOT NULL DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "role" "Role" NOT NULL DEFAULT 'ADMIN',
+    "role" "Role" NOT NULL DEFAULT 'USER',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -66,7 +66,7 @@ CREATE TABLE "Order" (
     "passportDate" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "addressRegistration" TEXT NOT NULL,
-    "passportSereies" TEXT NOT NULL,
+    "passportSeries" TEXT NOT NULL,
     "passportNumber" TEXT NOT NULL,
     "passportBranch" TEXT NOT NULL,
     "passportMainPagePhoto" TEXT NOT NULL,
@@ -80,12 +80,6 @@ CREATE TABLE "Order" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_login_key" ON "User"("login");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Order_districtId_key" ON "Order"("districtId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Order_tariffId_key" ON "Order"("tariffId");
 
 -- AddForeignKey
 ALTER TABLE "News" ADD CONSTRAINT "News_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -62,7 +62,7 @@ export class CreateOrderDto {
   @ApiProperty()
   @IsNumberString()
   @Length(4)
-  passportSereies: string;
+  passportSeries: string;
 
   @ApiProperty()
   @IsNumberString()

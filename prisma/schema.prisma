@@ -54,7 +54,7 @@ model Order {
   passportDate              String
   address                   String
   addressRegistration       String
-  passportSereies           String
+  passportSeries           String
   passportNumber            String
   passportBranch            String
   passportMainPagePhoto     String

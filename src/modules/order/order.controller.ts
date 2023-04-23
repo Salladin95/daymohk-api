@@ -6,10 +6,10 @@ import {
   Put,
   Param,
   Delete,
-  UsePipes,
-  ValidationPipe,
   HttpCode,
   ParseUUIDPipe,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -18,16 +18,10 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 @Controller('order')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
-  @UsePipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  )
+  @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   create(@Body() createOrderDto: CreateOrderDto) {
-    return this.orderService.create(createOrderDto);
+    return this.orderService.create(new CreateOrderDto(createOrderDto));
   }
 
   @Get()
@@ -40,13 +34,6 @@ export class OrderController {
     return this.orderService.findOne(id);
   }
 
-  @UsePipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  )
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe) id: string,

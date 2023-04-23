@@ -7,21 +7,12 @@ import {
   Param,
   Delete,
   HttpCode,
-  UsePipes,
-  ValidationPipe,
   ParseUUIDPipe,
 } from '@nestjs/common';
 import { DistrictService } from './district.service';
 import { CreateDistrictDto } from './dto/create-district.dto';
 import { UpdateDistrictDto } from './dto/update-district.dto';
 
-@UsePipes(
-  new ValidationPipe({
-    transform: true,
-    whitelist: true,
-    forbidNonWhitelisted: true,
-  }),
-)
 @Controller('district')
 export class DistrictController {
   constructor(private readonly districtService: DistrictService) {}
@@ -42,13 +33,6 @@ export class DistrictController {
     return this.districtService.findOne(id);
   }
 
-  @UsePipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  )
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe) id: string,

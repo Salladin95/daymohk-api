@@ -1,3 +1,4 @@
+import { Transform } from '@nestjs/class-transformer';
 import {
   IsNotEmpty,
   IsString,
@@ -8,6 +9,7 @@ import {
   IsNumberString,
 } from '@nestjs/class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsDateString } from 'class-validator';
 
 export type Gender = 'man' | 'woman';
 const gender = ['man', 'woman'];
@@ -16,6 +18,16 @@ export type OrderStatus = 'active' | 'archive';
 const orderStatus = ['active', 'archive'];
 
 export class CreateOrderDto {
+  @ApiProperty()
+  @IsDateString()
+  @Transform(({ value }) => new Date(value))
+  birthday: Date;
+
+  @ApiProperty()
+  @IsDateString()
+  @Transform(({ value }) => new Date(value))
+  passportDate: Date;
+
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
@@ -40,14 +52,6 @@ export class CreateOrderDto {
   @IsOptional()
   @IsIn(orderStatus)
   status: OrderStatus;
-
-  @ApiProperty()
-  @IsString()
-  birthday: string;
-
-  @ApiProperty()
-  @IsString()
-  passportDate: string;
 
   @ApiProperty()
   @IsString()
@@ -91,4 +95,8 @@ export class CreateOrderDto {
   @ApiProperty()
   @IsUUID()
   districtId: string;
+
+  constructor(partial: Partial<CreateOrderDto>) {
+    Object.assign(this, partial);
+  }
 }

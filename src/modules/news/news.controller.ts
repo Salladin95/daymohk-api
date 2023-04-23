@@ -6,9 +6,7 @@ import {
   Put,
   Param,
   Delete,
-  UsePipes,
   HttpCode,
-  ValidationPipe,
   ParseUUIDPipe,
 } from '@nestjs/common';
 import { NewsService } from './news.service';
@@ -21,13 +19,6 @@ export class NewsController {
 
   @Post()
   @HttpCode(201)
-  @UsePipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  )
   create(@Body() createNewsDto: CreateNewsDto) {
     return this.newsService.create(createNewsDto);
   }
@@ -42,13 +33,6 @@ export class NewsController {
     return this.newsService.findOne(id);
   }
 
-  @UsePipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  )
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe) id: string,

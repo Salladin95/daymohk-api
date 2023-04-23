@@ -50,8 +50,8 @@ model Order {
   personalName              String
   lastName                  String
   gender                    Gender
-  birthday                  String
-  passportDate              String
+  birthday                  DateTime
+  passportDate              DateTime
   address                   String
   addressRegistration       String
   passportSeries           String

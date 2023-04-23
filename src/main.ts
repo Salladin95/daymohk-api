@@ -6,12 +6,20 @@ import { ManualConfigEnum } from './configs/manual.config';
 import { PrismaService } from './prisma/prisma.service';
 import { AppModule } from './app.module';
 import { json, urlencoded } from 'express';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
 
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ extended: true, limit: '50mb' }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
 
   const configService = app.get(ConfigService);
   const port = +configService.get(ManualConfigEnum.PORT);

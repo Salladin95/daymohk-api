@@ -6,8 +6,6 @@ import {
   Put,
   Param,
   Delete,
-  UsePipes,
-  ValidationPipe,
   HttpCode,
   ParseUUIDPipe,
 } from '@nestjs/common';
@@ -19,13 +17,6 @@ import { UpdateTariffDto } from './dto/update-tariff.dto';
 export class TariffController {
   constructor(private readonly tariffService: TariffService) {}
 
-  @UsePipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  )
   @HttpCode(201)
   @Post()
   create(@Body() createTariffDto: CreateTariffDto) {
@@ -61,13 +52,7 @@ export class TariffController {
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.tariffService.findOne(id);
   }
-  @UsePipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  )
+
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe) id: string,

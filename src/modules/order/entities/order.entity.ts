@@ -18,10 +18,10 @@ export class OrderEntity {
   gender: Gender;
 
   @ApiProperty()
-  birthday: string;
+  birthday: Date;
 
   @ApiProperty()
-  passportDate: string;
+  passportDate: Date;
 
   @ApiProperty()
   address: string;

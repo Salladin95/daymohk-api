@@ -73,7 +73,8 @@ enum Role {
 
 enum OrderStatus {
   active
-  archive
+  archived
+  canseled
 }
 
 enum Gender {

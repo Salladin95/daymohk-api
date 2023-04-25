@@ -6,6 +6,7 @@ import { DistrictService } from '../district/district.service';
 import { TariffService } from '../tariff/tariff.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { OrderStatusEnum } from './order.contracts';
 
 @Injectable()
 export class OrderService {
@@ -28,6 +29,24 @@ export class OrderService {
     return this.prismaService.order.findMany();
   }
 
+  async findAllActive() {
+    return this.prismaService.order.findMany({
+      where: { status: OrderStatusEnum.active },
+    });
+  }
+
+  async findAllArchived() {
+    return this.prismaService.order.findMany({
+      where: { status: OrderStatusEnum.archived },
+    });
+  }
+
+  async findAllCanseled() {
+    return this.prismaService.order.findMany({
+      where: { status: OrderStatusEnum.canseled },
+    });
+  }
+
   async findOne(id: string) {
     const order = await this.prismaService.order.findUnique({ where: { id } });
     if (!order) {
@@ -43,6 +62,24 @@ export class OrderService {
       data: updateOrderDto,
     });
     return updatedOrder;
+  }
+
+  async archive(id: string) {
+    await this.findOne(id);
+    const result = await this.prismaService.order.update({
+      where: { id },
+      data: { status: OrderStatusEnum.archived },
+    });
+    return result;
+  }
+
+  async cansel(id: string) {
+    await this.findOne(id);
+    const result = await this.prismaService.order.update({
+      where: { id },
+      data: { status: OrderStatusEnum.canseled },
+    });
+    return result;
   }
 
   async remove(id: string) {

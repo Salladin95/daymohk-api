@@ -14,7 +14,7 @@ import { IsDateString } from 'class-validator';
 export type Gender = 'man' | 'woman';
 const gender = ['man', 'woman'];
 
-export type OrderStatus = 'active' | 'archive';
+export type OrderStatus = 'active' | 'archived' | 'canseled';
 const orderStatus = ['active', 'archive'];
 
 export class CreateOrderDto {

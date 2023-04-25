@@ -14,6 +14,7 @@ import {
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { OrderStatusEnum } from './order.contracts';
 
 @Controller('order')
 export class OrderController {
@@ -29,6 +30,21 @@ export class OrderController {
     return this.orderService.findAll();
   }
 
+  @Get(OrderStatusEnum.active)
+  findAllActive() {
+    return this.orderService.findAllActive();
+  }
+
+  @Get(OrderStatusEnum.archived)
+  findAllArchived() {
+    return this.orderService.findAllArchived();
+  }
+
+  @Get(OrderStatusEnum.canseled)
+  findAllCanseled() {
+    return this.orderService.findAllCanseled();
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.orderService.findOne(id);
@@ -40,6 +56,16 @@ export class OrderController {
     @Body() updateOrderDto: UpdateOrderDto,
   ) {
     return this.orderService.update(id, updateOrderDto);
+  }
+
+  @Put(':id/archive')
+  archive(@Param('id', ParseUUIDPipe) id: string) {
+    return this.orderService.archive(id);
+  }
+
+  @Put(':id/cansel')
+  cansel(@Param('id', ParseUUIDPipe) id: string) {
+    return this.orderService.cansel(id);
   }
 
   @HttpCode(204)

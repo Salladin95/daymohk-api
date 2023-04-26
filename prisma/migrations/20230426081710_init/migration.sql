@@ -2,7 +2,7 @@
 CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER');
 
 -- CreateEnum
-CREATE TYPE "OrderStatus" AS ENUM ('active', 'archive');
+CREATE TYPE "OrderStatus" AS ENUM ('active', 'archived', 'canseled');
 
 -- CreateEnum
 CREATE TYPE "Gender" AS ENUM ('man', 'woman');

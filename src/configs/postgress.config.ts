@@ -9,6 +9,7 @@ export type PostgresConfigOptions = {
   host: string;
   url: string;
 };
+
 export enum PostgressConfigEnum {
   PORT = 'postgress.port',
   URL = 'postgress.baseURL',

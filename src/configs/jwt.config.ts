@@ -7,13 +7,15 @@ export type JwtConfigOptions = {
   accessTokenExpiresIn: string;
   refreshTokenExpiresIn: string;
 };
-export enum PostgressConfigEnum {
-  SALT = 'postgress.salt',
+
+export enum JWTConfigEnum {
+  SALT = 'jwt.salt',
   ACCESSTOKENSECRET = 'jwt.accessTokenSecret',
   REFRESHTOKENSECRET = 'jwt.refreshTokenSecret',
   ACCESSTOKENEXPIRESIN = 'jwt.accessTokenExpiresIn',
   REFRESHTOKENEXPIRESIN = 'jwt.refreshTokenExpiresIn',
 }
+
 export default registerAs(
   'jwt',
   (): JwtConfigOptions => ({

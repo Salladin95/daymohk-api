@@ -1,6 +1,7 @@
 import { registerAs } from '@nestjs/config';
 
 export type ManualConfigOptions = { port: number; baseURL: string };
+
 export enum ManualConfigEnum {
   PORT = 'manual.port',
   BASER_URL = 'manual.baseURL',

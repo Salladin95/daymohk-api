@@ -6,6 +6,8 @@ import { DistrictModule } from './modules/district/district.module';
 import { NewsModule } from './modules/news/news.module';
 import { OrderModule } from './modules/order/order.module';
 import { TariffModule } from './modules/tariff/tariff.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -16,8 +18,10 @@ import { TariffModule } from './modules/tariff/tariff.module';
     TariffModule,
     DistrictModule,
     OrderModule,
+    AuthModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

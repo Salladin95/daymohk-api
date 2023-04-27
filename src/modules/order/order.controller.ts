@@ -16,9 +16,8 @@ import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { OrderStatusEnum } from './order.contracts';
-import { JwtAccessAuthGuard } from '../auth/guards';
+import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
 import { Role, Roles } from 'src/decorators';
-import RolesGuard from 'src/guards';
 
 @Controller('order')
 export class OrderController {

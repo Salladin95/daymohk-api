@@ -13,9 +13,8 @@ import {
 import { TariffService } from './tariff.service';
 import { CreateTariffDto } from './dto/create-tariff.dto';
 import { UpdateTariffDto } from './dto/update-tariff.dto';
-import { JwtAccessAuthGuard } from '../auth/guards';
+import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
 import { Role, Roles } from 'src/decorators';
-import RolesGuard from 'src/guards';
 
 @Controller('tariff')
 export class TariffController {

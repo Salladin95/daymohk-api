@@ -16,13 +16,13 @@ import { LoginDto } from './dto/login.dto';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly usersService: UserService,
+    private readonly userService: UserService,
     private readonly jwtService: JwtService,
     private readonly config: ConfigService,
   ) { }
 
   async login({ login, password }: LoginDto) {
-    const user = await this.usersService.findOneByLogin(login);
+    const user = await this.userService.findOneByLogin(login);
 
     if (!user) {
       throw new ForbiddenException(userNotExist);
@@ -69,5 +69,13 @@ export class AuthService {
       expiresIn: this.config.get('jwt.refreshTokenExpiresIn'),
     });
     return { accessToken, refreshToken };
+  }
+
+  async validateUser(username: string, pass: string): Promise<any> {
+    const user = await this.userService.findOne(username);
+    if (user && user.password === pass) {
+      return user;
+    }
+    return null;
   }
 }

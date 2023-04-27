@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { Role, Roles } from 'src/decorators';
 import RolesGuard from 'src/guards/roles.guard';
-import { JwtAccessAuthGuard } from '../auth/guards';
+import { JwtAccessAuthGuard } from '../../guards';
 import { DistrictService } from './district.service';
 import { CreateDistrictDto } from './dto/create-district.dto';
 import { UpdateDistrictDto } from './dto/update-district.dto';

@@ -18,9 +18,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
-import { JwtAccessAuthGuard } from '../auth/guards';
+import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
 import { Role, Roles } from 'src/decorators';
-import RolesGuard from 'src/guards';
 
 @ApiTags('user')
 @Roles(Role.Admin)

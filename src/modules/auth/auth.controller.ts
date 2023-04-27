@@ -12,7 +12,7 @@ import {
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { AuthService } from './auth.service';
 import { RefreshDto } from './dto/auth.dto';
-import { JwtRefreshAuthGuard } from './guards/';
+import { JwtRefreshAuthGuard } from '../../guards/';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')

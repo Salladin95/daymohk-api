@@ -22,13 +22,13 @@ import { JwtAccessAuthGuard } from '../auth/guards';
 import { Role, Roles } from 'src/decorators';
 
 @ApiTags('user')
+@UseGuards(JwtAccessAuthGuard)
+@Roles(Role.Admin)
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('user')
 export class UserController {
   constructor(private readonly usersService: UserService) { }
 
-  @UseGuards(JwtAccessAuthGuard)
-  @Roles(Role.Admin)
   @Post()
   @HttpCode(201)
   @ApiBody({ type: CreateUserDto })
@@ -67,8 +67,6 @@ export class UserController {
     return this.usersService.findOne(id);
   }
 
-  @UseGuards(JwtAccessAuthGuard)
-  @Roles(Role.Admin)
   @Put(':id')
   @ApiResponse({
     status: 200,
@@ -86,8 +84,6 @@ export class UserController {
     status: 404,
     description: 'Not found',
   })
-  @UseGuards(JwtAccessAuthGuard)
-  @Roles(Role.Admin)
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateUserDto: UpdateUserDto,
@@ -95,8 +91,6 @@ export class UserController {
     return this.usersService.update(id, updateUserDto);
   }
 
-  @UseGuards(JwtAccessAuthGuard)
-  @Roles(Role.Admin)
   @Delete(':id')
   @ApiResponse({
     status: 204,

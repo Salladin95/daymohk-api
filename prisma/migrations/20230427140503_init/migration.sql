@@ -18,7 +18,7 @@ CREATE TABLE "User" (
     "version" INTEGER NOT NULL DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "role" "Role" NOT NULL DEFAULT 'USER',
+    "roles" "Role"[] DEFAULT ARRAY['USER']::"Role"[],
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

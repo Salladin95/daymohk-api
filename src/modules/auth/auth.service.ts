@@ -33,20 +33,25 @@ export class AuthService {
     if (!passwordMatch) {
       throw new ForbiddenException(passwordsDontMatchMsg);
     }
-    const tokens = await this.getTokens({ userId: user.id, login: user.login });
+
+    const tokens = await this.getTokens({
+      userId: user.id,
+      login: user.login,
+      roles: user.roles,
+    });
     return tokens;
   }
 
   async refresh({ refreshToken }: RefreshDto) {
     try {
-      const { login, userId } = await this.jwtService.verifyAsync(
+      const { login, userId, roles } = await this.jwtService.verifyAsync(
         refreshToken,
         {
           secret: this.config.get('jwt.refreshTokenSecret'),
           ignoreExpiration: false,
         },
       );
-      const tokens = await this.getTokens({ userId, login });
+      const tokens = await this.getTokens({ userId, login, roles });
       return tokens;
     } catch {
       throw new ForbiddenException(invalidTokenMsg);
@@ -54,6 +59,7 @@ export class AuthService {
   }
 
   async getTokens(payload: JwtPayload) {
+    console.log(payload);
     const accessToken = await this.jwtService.signAsync(payload, {
       secret: this.config.get('jwt.accessTokenSecret'),
       expiresIn: this.config.get('jwt.accessTokenExpiresIn'),

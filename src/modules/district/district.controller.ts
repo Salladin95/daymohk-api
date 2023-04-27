@@ -11,6 +11,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Role, Roles } from 'src/decorators';
+import RolesGuard from 'src/guards/roles.guard';
 import { JwtAccessAuthGuard } from '../auth/guards';
 import { DistrictService } from './district.service';
 import { CreateDistrictDto } from './dto/create-district.dto';
@@ -20,8 +21,8 @@ import { UpdateDistrictDto } from './dto/update-district.dto';
 export class DistrictController {
   constructor(private readonly districtService: DistrictService) { }
 
-  @UseGuards(JwtAccessAuthGuard)
   @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @HttpCode(201)
   @Post()
   create(@Body() createDistrictDto: CreateDistrictDto) {
@@ -38,8 +39,8 @@ export class DistrictController {
     return this.districtService.findOne(id);
   }
 
-  @UseGuards(JwtAccessAuthGuard)
   @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe) id: string,
@@ -49,8 +50,8 @@ export class DistrictController {
   }
 
   @HttpCode(204)
-  @UseGuards(JwtAccessAuthGuard)
   @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.districtService.remove(id);

@@ -15,13 +15,14 @@ import { CreateTariffDto } from './dto/create-tariff.dto';
 import { UpdateTariffDto } from './dto/update-tariff.dto';
 import { JwtAccessAuthGuard } from '../auth/guards';
 import { Role, Roles } from 'src/decorators';
+import RolesGuard from 'src/guards';
 
 @Controller('tariff')
 export class TariffController {
   constructor(private readonly tariffService: TariffService) { }
 
-  @UseGuards(JwtAccessAuthGuard)
   @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @HttpCode(201)
   @Post()
   create(@Body() createTariffDto: CreateTariffDto) {
@@ -58,8 +59,8 @@ export class TariffController {
     return this.tariffService.findOne(id);
   }
 
-  @UseGuards(JwtAccessAuthGuard)
   @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe) id: string,
@@ -68,8 +69,8 @@ export class TariffController {
     return this.tariffService.update(id, updateTariffDto);
   }
 
-  @UseGuards(JwtAccessAuthGuard)
   @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @HttpCode(204)
   @Delete(':id')
   remove(@Param('id', ParseUUIDPipe) id: string) {

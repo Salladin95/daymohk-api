@@ -20,10 +20,11 @@ import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
 import { JwtAccessAuthGuard } from '../auth/guards';
 import { Role, Roles } from 'src/decorators';
+import RolesGuard from 'src/guards';
 
 @ApiTags('user')
-@UseGuards(JwtAccessAuthGuard)
 @Roles(Role.Admin)
+@UseGuards(JwtAccessAuthGuard, RolesGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('user')
 export class UserController {

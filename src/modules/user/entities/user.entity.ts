@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Transform } from 'class-transformer';
 
-type Role = 'ADMIN' | 'USER';
+export type Role = 'ADMIN' | 'USER';
 
 export class User {
   @ApiProperty()

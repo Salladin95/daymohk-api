@@ -5,7 +5,11 @@ import { encodePassword } from '../src/utils/bcrypt';
 const prisma = new PrismaClient();
 const rootAdminLogin = process.env.ROOT_ADMIN_LOGIN ?? 'admin01';
 const rootAdminPassword = process.env.ROOT_ADMIN_PASSWORD ?? 'password-01';
-const salt = +process.env.SALT ?? 99;
+
+const testUserLogin = process.env.TEST_USER ?? 'testUser';
+const testUserPassword = process.env.USER_DEFAULT_PASSWORD ?? 'password-01';
+
+const salt = +process.env.SALT ?? 7;
 
 async function main() {
   const hashPass = await encodePassword(rootAdminPassword, salt);
@@ -16,6 +20,16 @@ async function main() {
       login: rootAdminLogin,
       password: hashPass,
       roles: [Role.Admin, Role.User],
+    },
+  });
+
+  const testUserHashPass = await encodePassword(testUserPassword, salt);
+  await prisma.user.upsert({
+    where: { login: testUserLogin },
+    update: {},
+    create: {
+      login: testUserLogin,
+      password: testUserHashPass,
     },
   });
 }

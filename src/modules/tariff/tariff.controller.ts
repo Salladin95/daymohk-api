@@ -8,15 +8,20 @@ import {
   Delete,
   HttpCode,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { TariffService } from './tariff.service';
 import { CreateTariffDto } from './dto/create-tariff.dto';
 import { UpdateTariffDto } from './dto/update-tariff.dto';
+import { JwtAccessAuthGuard } from '../auth/guards';
+import { Role, Roles } from 'src/decorators';
 
 @Controller('tariff')
 export class TariffController {
-  constructor(private readonly tariffService: TariffService) {}
+  constructor(private readonly tariffService: TariffService) { }
 
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   @HttpCode(201)
   @Post()
   create(@Body() createTariffDto: CreateTariffDto) {
@@ -53,6 +58,8 @@ export class TariffController {
     return this.tariffService.findOne(id);
   }
 
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe) id: string,
@@ -61,6 +68,8 @@ export class TariffController {
     return this.tariffService.update(id, updateTariffDto);
   }
 
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   @HttpCode(204)
   @Delete(':id')
   remove(@Param('id', ParseUUIDPipe) id: string) {

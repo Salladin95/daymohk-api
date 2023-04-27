@@ -10,16 +10,22 @@ import {
   ParseUUIDPipe,
   UseInterceptors,
   ClassSerializerInterceptor,
+  UseGuards,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { OrderStatusEnum } from './order.contracts';
+import { JwtAccessAuthGuard } from '../auth/guards';
+import { Role, Roles } from 'src/decorators';
 
 @Controller('order')
 export class OrderController {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(private readonly orderService: OrderService) { }
+
   @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   @Post()
   create(@Body() createOrderDto: CreateOrderDto) {
     return this.orderService.create(new CreateOrderDto(createOrderDto));
@@ -50,6 +56,8 @@ export class OrderController {
     return this.orderService.findOne(id);
   }
 
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe) id: string,
@@ -58,17 +66,23 @@ export class OrderController {
     return this.orderService.update(id, updateOrderDto);
   }
 
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   @Put(':id/archive')
   archive(@Param('id', ParseUUIDPipe) id: string) {
     return this.orderService.archive(id);
   }
 
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   @Put(':id/cansel')
   cansel(@Param('id', ParseUUIDPipe) id: string) {
     return this.orderService.cansel(id);
   }
 
   @HttpCode(204)
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.orderService.remove(id);

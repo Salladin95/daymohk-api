@@ -8,8 +8,6 @@ import {
   HttpCode,
   ParseUUIDPipe,
   Put,
-  UsePipes,
-  ValidationPipe,
   UseInterceptors,
   ClassSerializerInterceptor,
   UseGuards,
@@ -21,14 +19,16 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
 import { JwtAccessAuthGuard } from '../auth/guards';
+import { Role, Roles } from 'src/decorators';
 
 @ApiTags('user')
 @UseInterceptors(ClassSerializerInterceptor)
-@UseGuards(JwtAccessAuthGuard)
 @Controller('user')
 export class UserController {
   constructor(private readonly usersService: UserService) { }
 
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   @Post()
   @HttpCode(201)
   @ApiBody({ type: CreateUserDto })
@@ -67,6 +67,8 @@ export class UserController {
     return this.usersService.findOne(id);
   }
 
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   @Put(':id')
   @ApiResponse({
     status: 200,
@@ -84,6 +86,8 @@ export class UserController {
     status: 404,
     description: 'Not found',
   })
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateUserDto: UpdateUserDto,
@@ -91,6 +95,8 @@ export class UserController {
     return this.usersService.update(id, updateUserDto);
   }
 
+  @UseGuards(JwtAccessAuthGuard)
+  @Roles(Role.Admin)
   @Delete(':id')
   @ApiResponse({
     status: 204,

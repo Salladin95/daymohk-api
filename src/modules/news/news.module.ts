@@ -10,4 +10,4 @@ import { AuthModule } from '../auth/auth.module';
   providers: [NewsService, PrismaService],
   imports: [AuthModule],
 })
-export class NewsModule { }
+export class NewsModule {}

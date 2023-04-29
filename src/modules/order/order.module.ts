@@ -12,4 +12,4 @@ import { AuthModule } from '../auth/auth.module';
   controllers: [OrderController],
   providers: [OrderService, PrismaService],
 })
-export class OrderModule { }
+export class OrderModule {}

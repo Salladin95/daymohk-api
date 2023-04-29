@@ -10,4 +10,4 @@ import { AuthModule } from '../auth/auth.module';
   exports: [TariffService],
   imports: [AuthModule],
 })
-export class TariffModule { }
+export class TariffModule {}

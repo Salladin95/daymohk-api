@@ -21,7 +21,7 @@ import { Role, Roles } from 'src/decorators';
 
 @Controller('order')
 export class OrderController {
-  constructor(private readonly orderService: OrderService) { }
+  constructor(private readonly orderService: OrderService) {}
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Roles(Role.Admin)

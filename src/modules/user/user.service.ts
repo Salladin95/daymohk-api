@@ -16,7 +16,7 @@ import { passwordsDontMatchMsg } from 'src/utils/messages';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService, private config: ConfigService) { }
+  constructor(private prisma: PrismaService, private config: ConfigService) {}
   async create({ login, password }: CreateUserDto) {
     const salt = this.config.get(JWTConfigEnum.SALT);
     const hash = await encodePassword(password, salt);

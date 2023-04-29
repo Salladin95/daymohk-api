@@ -10,4 +10,4 @@ import { AuthModule } from '../auth/auth.module';
   exports: [DistrictService],
   imports: [AuthModule],
 })
-export class DistrictModule { }
+export class DistrictModule {}

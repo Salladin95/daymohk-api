@@ -18,7 +18,7 @@ import { Role, Roles } from 'src/decorators';
 
 @Controller('tariff')
 export class TariffController {
-  constructor(private readonly tariffService: TariffService) { }
+  constructor(private readonly tariffService: TariffService) {}
 
   @Roles(Role.Admin)
   @UseGuards(JwtAccessAuthGuard, RolesGuard)

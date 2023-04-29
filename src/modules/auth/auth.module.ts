@@ -19,4 +19,4 @@ import { JwtAccessStrategy, JwtRefreshStrategy } from '../../strategies';
   ],
   exports: [AuthService, JwtAccessStrategy, JwtAccessStrategy, JwtModule],
 })
-export class AuthModule { }
+export class AuthModule {}

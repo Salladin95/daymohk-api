@@ -27,7 +27,7 @@ import { Role, Roles } from 'src/decorators';
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('user')
 export class UserController {
-  constructor(private readonly usersService: UserService) { }
+  constructor(private readonly usersService: UserService) {}
 
   @Post()
   @HttpCode(201)

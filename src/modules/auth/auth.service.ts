@@ -19,7 +19,7 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
     private readonly config: ConfigService,
-  ) { }
+  ) {}
 
   async login({ login, password }: LoginDto) {
     const user = await this.userService.findOneByLogin(login);
@@ -59,7 +59,6 @@ export class AuthService {
   }
 
   async getTokens(payload: JwtPayload) {
-    console.log(payload);
     const accessToken = await this.jwtService.signAsync(payload, {
       secret: this.config.get('jwt.accessTokenSecret'),
       expiresIn: this.config.get('jwt.accessTokenExpiresIn'),

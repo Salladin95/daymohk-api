@@ -19,7 +19,7 @@ import { UpdateDistrictDto } from './dto/update-district.dto';
 
 @Controller('district')
 export class DistrictController {
-  constructor(private readonly districtService: DistrictService) { }
+  constructor(private readonly districtService: DistrictService) {}
 
   @Roles(Role.Admin)
   @UseGuards(JwtAccessAuthGuard, RolesGuard)

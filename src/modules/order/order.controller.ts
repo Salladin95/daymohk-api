@@ -24,33 +24,41 @@ export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
   @UseInterceptors(ClassSerializerInterceptor)
-  @Roles(Role.Admin)
-  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @Post()
   create(@Body() createOrderDto: CreateOrderDto) {
     return this.orderService.create(new CreateOrderDto(createOrderDto));
   }
 
+  @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @Get()
   findAll() {
     return this.orderService.findAll();
   }
 
+  @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @Get(OrderStatusEnum.active)
   findAllActive() {
     return this.orderService.findAllActive();
   }
 
+  @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @Get(OrderStatusEnum.archived)
   findAllArchived() {
     return this.orderService.findAllArchived();
   }
 
+  @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @Get(OrderStatusEnum.canseled)
   findAllCanseled() {
     return this.orderService.findAllCanseled();
   }
 
+  @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @Get(':id')
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.orderService.findOne(id);

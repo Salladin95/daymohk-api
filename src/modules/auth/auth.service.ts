@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 
@@ -54,7 +58,7 @@ export class AuthService {
       const tokens = await this.getTokens({ userId, login, roles });
       return tokens;
     } catch {
-      throw new ForbiddenException(invalidTokenMsg);
+      throw new UnauthorizedException(invalidTokenMsg);
     }
   }
 

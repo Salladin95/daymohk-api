@@ -52,7 +52,7 @@ export class OrderController {
 
   @Roles(Role.Admin)
   @UseGuards(JwtAccessAuthGuard, RolesGuard)
-  @Get(OrderStatusEnum.canseled)
+  @Get(OrderStatusEnum.canceled)
   findAllCanseled() {
     return this.orderService.findAllCanseled();
   }
@@ -83,7 +83,7 @@ export class OrderController {
 
   @Roles(Role.Admin)
   @UseGuards(JwtAccessAuthGuard, RolesGuard)
-  @Put(':id/cansel')
+  @Put(':id/cancel')
   cansel(@Param('id', ParseUUIDPipe) id: string) {
     return this.orderService.cansel(id);
   }

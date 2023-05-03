@@ -43,7 +43,7 @@ export class OrderService {
 
   async findAllCanseled() {
     return this.prismaService.order.findMany({
-      where: { status: OrderStatusEnum.canseled },
+      where: { status: OrderStatusEnum.canceled },
     });
   }
 
@@ -77,7 +77,7 @@ export class OrderService {
     await this.findOne(id);
     const result = await this.prismaService.order.update({
       where: { id },
-      data: { status: OrderStatusEnum.canseled },
+      data: { status: OrderStatusEnum.canceled },
     });
     return result;
   }

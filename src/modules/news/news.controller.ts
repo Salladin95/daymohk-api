@@ -18,7 +18,7 @@ import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
 
 @Controller('news')
 export class NewsController {
-  constructor(private readonly newsService: NewsService) {}
+  constructor(private readonly newsService: NewsService) { }
 
   @Roles(Role.Admin)
   @UseGuards(JwtAccessAuthGuard, RolesGuard)

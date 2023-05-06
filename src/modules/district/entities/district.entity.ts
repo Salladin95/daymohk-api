@@ -5,5 +5,8 @@ export class District {
   id: string;
 
   @ApiProperty()
-  district: string;
+  title: string;
+
+  @ApiProperty()
+  code: string;
 }

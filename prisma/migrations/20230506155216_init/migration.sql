@@ -50,7 +50,8 @@ CREATE TABLE "Tariff" (
 -- CreateTable
 CREATE TABLE "AccessibleDistrict" (
     "id" TEXT NOT NULL,
-    "district" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "code" TEXT NOT NULL,
 
     CONSTRAINT "AccessibleDistrict_pkey" PRIMARY KEY ("id")
 );

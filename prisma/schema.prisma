@@ -40,7 +40,8 @@ model Tariff {
 
 model AccessibleDistrict {
   id       String  @id @default(uuid())
-  district String
+  title String
+  code String
   Order    Order[]
 }
 

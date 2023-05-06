@@ -64,6 +64,7 @@ model Order {
   tariff                    Tariff             @relation(fields: [tariffId], references: [id])
   tariffId                  String
   status                    OrderStatus        @default(active)
+  phoneNumber String
 }
 
 enum Role {

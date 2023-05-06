@@ -6,6 +6,9 @@ export class OrderEntity {
   id: string;
 
   @ApiProperty()
+  phoneNumber: string;
+
+  @ApiProperty()
   familyName: string;
 
   @ApiProperty()

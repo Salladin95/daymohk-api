@@ -31,6 +31,11 @@ export class CreateOrderDto {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
+  phoneNumber: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
   familyName: string;
 
   @ApiProperty()

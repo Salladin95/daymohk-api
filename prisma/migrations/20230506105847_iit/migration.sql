@@ -2,7 +2,7 @@
 CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER');
 
 -- CreateEnum
-CREATE TYPE "OrderStatus" AS ENUM ('active', 'archived', 'canseled');
+CREATE TYPE "OrderStatus" AS ENUM ('active', 'archived', 'canceled');
 
 -- CreateEnum
 CREATE TYPE "Gender" AS ENUM ('man', 'woman');
@@ -74,6 +74,7 @@ CREATE TABLE "Order" (
     "districtId" TEXT NOT NULL,
     "tariffId" TEXT NOT NULL,
     "status" "OrderStatus" NOT NULL DEFAULT 'active',
+    "phoneNumber" TEXT NOT NULL,
 
     CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
 );

@@ -33,9 +33,34 @@ export class TariffController {
     return this.tariffService.findWiredAll();
   }
 
+  @Get('archived')
+  findAllArchived() {
+    return this.tariffService.findAllArchived();
+  }
+
   @Get('wireLess')
   findWireLess() {
     return this.tariffService.findWireLessAll();
+  }
+
+  @Get('wired/active')
+  findWiredActive() {
+    return this.tariffService.findWiredAllActive();
+  }
+
+  @Get('wired/archived')
+  findWiredArchived() {
+    return this.tariffService.findWiredAllArcived();
+  }
+
+  @Get('wireLess/active')
+  findWireLessActive() {
+    return this.tariffService.findWireLessAllActive();
+  }
+
+  @Get('wireLess/archived')
+  findWireLessArchvied() {
+    return this.tariffService.findWireLessAllArchived();
   }
 
   @Get('wired/:id')
@@ -66,6 +91,13 @@ export class TariffController {
     @Body() updateTariffDto: UpdateTariffDto,
   ) {
     return this.tariffService.update(id, updateTariffDto);
+  }
+
+  @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
+  @Put('archive/:id')
+  archive(@Param('id', ParseUUIDPipe) id: string) {
+    return this.tariffService.archive(id);
   }
 
   @Roles(Role.Admin)

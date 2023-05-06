@@ -11,6 +11,14 @@ export class TariffService {
     return this.prisma.tariff.create({ data: createTariffDto });
   }
 
+  async findAllActive() {
+    return this.prisma.tariff.findMany({ where: { status: 'active' } });
+  }
+
+  async findAllArchived() {
+    return this.prisma.tariff.findMany({ where: { status: 'archived' } });
+  }
+
   async findAll() {
     return this.prisma.tariff.findMany();
   }
@@ -22,11 +30,21 @@ export class TariffService {
     }
     return tariff;
   }
+
   async update(id: string, updateTariffDto: UpdateTariffDto) {
     await this.findOne(id);
     const updatedTariff = await this.prisma.tariff.update({
       where: { id },
       data: updateTariffDto,
+    });
+    return updatedTariff;
+  }
+
+  async archive(id: string) {
+    await this.findOne(id);
+    const updatedTariff = await this.prisma.tariff.update({
+      where: { id },
+      data: { status: 'archived' },
     });
     return updatedTariff;
   }
@@ -49,6 +67,42 @@ export class TariffService {
     return this.prisma.tariff.findMany({
       where: {
         type: 'wireLess',
+      },
+    });
+  }
+
+  async findWiredAllActive() {
+    return this.prisma.tariff.findMany({
+      where: {
+        type: 'wired',
+        status: 'active',
+      },
+    });
+  }
+
+  async findWireLessAllActive() {
+    return this.prisma.tariff.findMany({
+      where: {
+        type: 'wireLess',
+        status: 'active',
+      },
+    });
+  }
+
+  async findWiredAllArcived() {
+    return this.prisma.tariff.findMany({
+      where: {
+        type: 'wired',
+        status: 'archived',
+      },
+    });
+  }
+
+  async findWireLessAllArchived() {
+    return this.prisma.tariff.findMany({
+      where: {
+        type: 'wireLess',
+        status: 'archived',
       },
     });
   }

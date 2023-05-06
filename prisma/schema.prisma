@@ -18,6 +18,11 @@ model User {
   News      News[]
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 model News {
   id              String   @id @default(uuid())
   title           String
@@ -36,6 +41,18 @@ model Tariff {
   cost  Int
   type  TariffTypes
   Order Order[]
+  status TariffStatus @default(active)
+}
+
+enum TariffTypes {
+  wired
+  wireLess
+}
+
+
+enum TariffStatus {
+  active
+  archived
 }
 
 model AccessibleDistrict {
@@ -68,10 +85,6 @@ model Order {
   phoneNumber String
 }
 
-enum Role {
-  ADMIN
-  USER
-}
 
 enum OrderStatus {
   active
@@ -82,9 +95,4 @@ enum OrderStatus {
 enum Gender {
   man
   woman
-}
-
-enum TariffTypes {
-  wired
-  wireLess
 }

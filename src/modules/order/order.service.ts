@@ -3,6 +3,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import getNotFoundMsg from 'src/utils/getNotFoundMsg';
 import { DistrictService } from '../district/district.service';
+import { MailService } from '../mail/mail.service';
 import { TariffService } from '../tariff/tariff.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
@@ -14,13 +15,18 @@ export class OrderService {
     private readonly prismaService: PrismaService,
     private readonly tariffService: TariffService,
     private readonly districtService: DistrictService,
-  ) {}
+    private readonly mailService: MailService,
+  ) { }
   async create(createOrderDto: CreateOrderDto) {
     await this.tariffService.findOne(createOrderDto.tariffId);
     await this.districtService.findOne(createOrderDto.districtId);
 
     const createdOrder = await this.prismaService.order.create({
       data: createOrderDto,
+    });
+    this.mailService.sendMessage({
+      subject: 'TITLE',
+      text: `Поступил новый заказ от ${createdOrder.personalName}`,
     });
     return createdOrder;
   }

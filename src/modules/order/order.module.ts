@@ -6,10 +6,11 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { TariffModule } from '../tariff/tariff.module';
 import { DistrictModule } from '../district/district.module';
 import { AuthModule } from '../auth/auth.module';
+import { MailModule } from '../mail/mail.module';
 
 @Module({
-  imports: [TariffModule, DistrictModule, AuthModule],
+  imports: [TariffModule, DistrictModule, AuthModule, MailModule],
   controllers: [OrderController],
   providers: [OrderService, PrismaService],
 })
-export class OrderModule {}
+export class OrderModule { }

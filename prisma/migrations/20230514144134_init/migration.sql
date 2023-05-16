@@ -2,13 +2,16 @@
 CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER');
 
 -- CreateEnum
+CREATE TYPE "TariffTypes" AS ENUM ('wired', 'wireLess');
+
+-- CreateEnum
+CREATE TYPE "TariffStatus" AS ENUM ('active', 'archived');
+
+-- CreateEnum
 CREATE TYPE "OrderStatus" AS ENUM ('active', 'archived', 'canceled');
 
 -- CreateEnum
 CREATE TYPE "Gender" AS ENUM ('man', 'woman');
-
--- CreateEnum
-CREATE TYPE "TariffTypes" AS ENUM ('wired', 'wireLess');
 
 -- CreateTable
 CREATE TABLE "User" (
@@ -43,6 +46,7 @@ CREATE TABLE "Tariff" (
     "speed" INTEGER NOT NULL,
     "cost" INTEGER NOT NULL,
     "type" "TariffTypes" NOT NULL,
+    "status" "TariffStatus" NOT NULL DEFAULT 'active',
 
     CONSTRAINT "Tariff_pkey" PRIMARY KEY ("id")
 );

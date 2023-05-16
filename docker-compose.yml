@@ -2,6 +2,25 @@
 version: '3.8'
 
 services:
+  app:
+    container_name: daymohk-app
+    image: daymohk-app
+    build: .
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - db
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 3s
+        max_attempts: 5
+        window: 60s
+    networks:
+      - net
+    volumes:
+      - ./src:/usr/src/app/src
+      - /usr/src/app/node_modules
   db:
     container_name: postgres-db
     image: postgres-db

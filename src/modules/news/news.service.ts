@@ -7,7 +7,7 @@ import { UpdateNewsDto } from './dto/update-news.dto';
 
 @Injectable()
 export class NewsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
   async create(createNewsDto: CreateNewsDto) {
     return this.prisma.news.create({ data: createNewsDto });
   }

@@ -22,8 +22,8 @@ services:
       - ./src:/usr/src/app/src
       - /usr/src/app/node_modules
   db:
-    container_name: postgres-db
-    image: postgres-db
+    container_name: ${POSTGRES_HOST}
+    image: ${POSTGRES_HOST}
     build: ./db
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}

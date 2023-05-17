@@ -12,7 +12,7 @@
     "start:dev": "yarn run deploy && nest start --watch",
     "seed": "npx prisma db seed",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main.js",
     "generate": "npx prisma migrate dev --name",
     "deploy": "npx prisma migrate deploy",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",

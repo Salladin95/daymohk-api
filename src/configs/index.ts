@@ -11,13 +11,13 @@ enum ConfigEnum {
 }
 
 export {
-  mailerConfig,
-  MailerConfigOptions,
-  postgressConfig,
-  PostgresConfigOptions,
-  manualConfig,
+  ConfigEnum,
   jwtConfig,
   JwtConfigOptions,
-  ConfigEnum,
+  mailerConfig,
+  MailerConfigOptions,
+  manualConfig,
   ManualConfigOptions,
+  PostgresConfigOptions,
+  postgressConfig,
 };

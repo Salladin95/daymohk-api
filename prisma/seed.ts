@@ -1,13 +1,13 @@
-import { PrismaClient } from '@prisma/client';
-import { Role } from '../src/decorators';
-import { encodePassword } from '../src/utils/bcrypt';
+import { PrismaClient } from "@prisma/client";
+import { Role } from "../src/decorators";
+import { encodePassword } from "../src/utils/bcrypt";
 
 const prisma = new PrismaClient();
-const rootAdminLogin = process.env.ROOT_ADMIN_LOGIN ?? 'admin01';
-const rootAdminPassword = process.env.ROOT_ADMIN_PASSWORD ?? 'password-01';
+const rootAdminLogin = process.env.ROOT_ADMIN_LOGIN ?? "admin01";
+const rootAdminPassword = process.env.ROOT_ADMIN_PASSWORD ?? "password-01";
 
-const testUserLogin = process.env.TEST_USER ?? 'testUser';
-const testUserPassword = process.env.USER_DEFAULT_PASSWORD ?? 'password-01';
+const testUserLogin = process.env.TEST_USER ?? "testUser";
+const testUserPassword = process.env.USER_DEFAULT_PASSWORD ?? "password-01";
 
 const salt = +process.env.SALT ?? 7;
 

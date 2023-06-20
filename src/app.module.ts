@@ -32,4 +32,4 @@ import { MailModule } from './modules/mail/mail.module';
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}

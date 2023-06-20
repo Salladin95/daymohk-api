@@ -1,16 +1,16 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Param,
-  Delete,
-  HttpCode,
-  ParseUUIDPipe,
-  Put,
-  UseInterceptors,
   ClassSerializerInterceptor,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Put,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 
 import { UserService } from './user.service';

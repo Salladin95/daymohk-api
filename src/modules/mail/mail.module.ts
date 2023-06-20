@@ -24,4 +24,4 @@ import { MailService } from './mail.service';
     }),
   ],
 })
-export class MailModule { }
+export class MailModule {}

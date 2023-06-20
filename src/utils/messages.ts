@@ -7,7 +7,7 @@ const invalidTokenMsg = 'Invalid token';
 export {
   invalidTokenMsg,
   notFoundMsg,
-  userAlreadyExistMsg,
   passwordsDontMatchMsg,
+  userAlreadyExistMsg,
   userNotExist,
 };

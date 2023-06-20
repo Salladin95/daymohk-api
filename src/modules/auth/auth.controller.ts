@@ -1,11 +1,11 @@
 import {
+  Body,
+  ClassSerializerInterceptor,
   Controller,
   Post,
-  Body,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
-  UseInterceptors,
-  ClassSerializerInterceptor,
 } from '@nestjs/common';
 
 import { CreateUserDto } from '../user/dto/create-user.dto';

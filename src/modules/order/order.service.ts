@@ -16,7 +16,7 @@ export class OrderService {
     private readonly tariffService: TariffService,
     private readonly districtService: DistrictService,
     private readonly mailService: MailService,
-  ) { }
+  ) {}
   async create(createOrderDto: CreateOrderDto) {
     await this.tariffService.findOne(createOrderDto.tariffId);
     await this.districtService.findOne(createOrderDto.districtId);

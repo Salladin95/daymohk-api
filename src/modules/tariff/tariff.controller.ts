@@ -1,13 +1,13 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Put,
-  Param,
+  Controller,
   Delete,
+  Get,
   HttpCode,
+  Param,
   ParseUUIDPipe,
+  Post,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { TariffService } from './tariff.service';

@@ -1,13 +1,13 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Put,
-  Param,
+  Controller,
   Delete,
+  Get,
   HttpCode,
+  Param,
   ParseUUIDPipe,
+  Post,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { NewsService } from './news.service';
@@ -18,7 +18,7 @@ import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
 
 @Controller('news')
 export class NewsController {
-  constructor(private readonly newsService: NewsService) { }
+  constructor(private readonly newsService: NewsService) {}
 
   @Roles(Role.Admin)
   @UseGuards(JwtAccessAuthGuard, RolesGuard)

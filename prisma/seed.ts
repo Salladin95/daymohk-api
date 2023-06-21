@@ -1,18 +1,25 @@
-import { PrismaClient } from "@prisma/client";
-import { Role } from "../src/decorators";
-import { encodePassword } from "../src/utils/bcrypt";
+import { PrismaClient } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
+
+enum Role {
+  User = 'USER',
+  Admin = 'ADMIN',
+}
+const encodePassword = async (password: string, salt: number) => {
+  return bcrypt.hash(password, salt);
+};
 
 const prisma = new PrismaClient();
-const rootAdminLogin = process.env.ROOT_ADMIN_LOGIN ?? "admin01";
-const rootAdminPassword = process.env.ROOT_ADMIN_PASSWORD ?? "password-01";
+const rootAdminLogin = process.env.ROOT_ADMIN_LOGIN ?? 'admin01';
+const rootAdminPassword = process.env.ROOT_ADMIN_PASSWORD ?? 'password-01';
 
-const testUserLogin = process.env.TEST_USER ?? "testUser";
-const testUserPassword = process.env.USER_DEFAULT_PASSWORD ?? "password-01";
+const testUserLogin = process.env.TEST_USER ?? 'testUser';
+const testUserPassword = process.env.USER_DEFAULT_PASSWORD ?? 'password-01';
 
-const salt = +process.env.SALT ?? 7;
+const salt = process.env.SALT ?? '7';
 
 async function main() {
-  const hashPass = await encodePassword(rootAdminPassword, salt);
+  const hashPass = await encodePassword(rootAdminPassword, +salt);
   await prisma.user.upsert({
     where: { login: rootAdminLogin },
     update: {},
@@ -23,7 +30,7 @@ async function main() {
     },
   });
 
-  const testUserHashPass = await encodePassword(testUserPassword, salt);
+  const testUserHashPass = await encodePassword(testUserPassword, +salt);
   await prisma.user.upsert({
     where: { login: testUserLogin },
     update: {},

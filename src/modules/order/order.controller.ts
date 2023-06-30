@@ -18,7 +18,9 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { OrderStatusEnum } from './order.contracts';
 import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
 import { Role, Roles } from 'src/decorators';
+import { SkipThrottle } from '@nestjs/throttler';
 
+@SkipThrottle()
 @Controller('order')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}

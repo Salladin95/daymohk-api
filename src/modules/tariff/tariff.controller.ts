@@ -15,7 +15,9 @@ import { CreateTariffDto } from './dto/create-tariff.dto';
 import { UpdateTariffDto } from './dto/update-tariff.dto';
 import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
 import { Role, Roles } from 'src/decorators';
+import { SkipThrottle } from '@nestjs/throttler';
 
+@SkipThrottle()
 @Controller('tariff')
 export class TariffController {
   constructor(private readonly tariffService: TariffService) {}

@@ -15,7 +15,9 @@ import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { Role, Roles } from 'src/decorators';
 import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
+import { SkipThrottle } from '@nestjs/throttler';
 
+@SkipThrottle()
 @Controller('news')
 export class NewsController {
   constructor(private readonly newsService: NewsService) {}

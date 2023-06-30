@@ -20,7 +20,9 @@ import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
 import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
 import { Role, Roles } from 'src/decorators';
+import { SkipThrottle } from '@nestjs/throttler';
 
+@SkipThrottle()
 @ApiTags('user')
 @Roles(Role.Admin)
 @UseGuards(JwtAccessAuthGuard, RolesGuard)

@@ -3,7 +3,6 @@ import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 
 import { PrismaClientExceptionFilter } from './prisma-client-exception/prisma-client-exception.filter';
 import { ManualConfigEnum } from './configs/manual.config';
-import { PrismaService } from './prisma/prisma.service';
 import { AppModule } from './app.module';
 import { json, urlencoded } from 'express';
 import { ValidationPipe } from '@nestjs/common';
@@ -31,9 +30,6 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   const port = +configService.get(ManualConfigEnum.PORT);
-
-  const prismaService = app.get(PrismaService);
-  await prismaService.enableShutdownHooks(app);
 
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));

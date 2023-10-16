@@ -10,10 +10,10 @@ export type JwtConfigOptions = {
 
 export enum JWTConfigEnum {
   SALT = 'jwt.salt',
-  ACCESSTOKENSECRET = 'jwt.accessTokenSecret',
-  REFRESHTOKENSECRET = 'jwt.refreshTokenSecret',
-  ACCESSTOKENEXPIRESIN = 'jwt.accessTokenExpiresIn',
-  REFRESHTOKENEXPIRESIN = 'jwt.refreshTokenExpiresIn',
+  ACCESS_TOKEN_SECRET = 'jwt.accessTokenSecret',
+  REFRESH_TOKEN_SECRET = 'jwt.refreshTokenSecret',
+  ACCESS_TOKEN_EXPIRES_IN = 'jwt.accessTokenExpiresIn',
+  REFRESH_TOKEN_EXPIRES_IN = 'jwt.refreshTokenExpiresIn',
 }
 
 export default registerAs(

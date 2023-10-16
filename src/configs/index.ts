@@ -1,17 +1,16 @@
 import jwtConfig, { JwtConfigOptions } from './jwt.config';
 import manualConfig, { ManualConfigOptions } from './manual.config';
-import postgressConfig, { PostgresConfigOptions } from './postgress.config';
+import postgresConfig, { PostgresConfigOptions } from './postgress.config';
 import mailerConfig, { MailerConfigOptions } from './mailer.config';
-
-enum ConfigEnum {
-  MANUAL = 'manual',
-  JWT = 'jwt',
-  POSTGRESS = 'postgress',
-  MAILER = 'mailer',
-}
+import imageKitConfig, {
+  ImageKitConfigEnum,
+  imageKitOptions,
+} from './imageKit.config';
 
 export {
-  ConfigEnum,
+  imageKitConfig,
+  ImageKitConfigEnum,
+  imageKitOptions,
   jwtConfig,
   JwtConfigOptions,
   mailerConfig,
@@ -19,5 +18,5 @@ export {
   manualConfig,
   ManualConfigOptions,
   PostgresConfigOptions,
-  postgressConfig,
+  postgresConfig,
 };

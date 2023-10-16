@@ -35,15 +35,7 @@ services:
         - pgdata:/var/lib/postgresql/data
       networks:
         - net
-  pgadmin:
-    container_name: pgadmin4
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_LOGIN}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    ports:
-      - ${PGADMIN_PORT}
+ 
 volumes:
   pgdata:
     driver: local

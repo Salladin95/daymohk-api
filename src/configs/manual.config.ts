@@ -5,6 +5,7 @@ export type ManualConfigOptions = {
   baseURL: string;
   throttleTtl: string;
   throttleLimit: string;
+  dest: string;
 };
 
 export enum ManualConfigEnum {
@@ -12,6 +13,7 @@ export enum ManualConfigEnum {
   BASER_URL = 'manual.baseURL',
   THROTTLE_TTL = 'manual.throttleTtl',
   THROTTLE_LIMIT = 'manual.throttleLimit',
+  MULTER_DEST = 'manual.dest',
 }
 
 export default registerAs(
@@ -21,5 +23,6 @@ export default registerAs(
     baseURL: process.env.BASE_URL || 'http://localhost:4000',
     throttleTtl: process.env.THROTTLE_TTL,
     throttleLimit: process.env.THROTTLE_LIMIT,
+    dest: process.env.DEST,
   }),
 );

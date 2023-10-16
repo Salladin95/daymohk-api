@@ -16,6 +16,7 @@ import { UserService } from '../user/user.service';
 import { JwtPayload } from './contracts.auth';
 import { RefreshDto } from './dto/auth.dto';
 import { LoginDto } from './dto/login.dto';
+import { JWTConfigEnum } from '../../configs/jwt.config';
 
 @Injectable()
 export class AuthService {
@@ -51,7 +52,7 @@ export class AuthService {
       const { login, userId, roles } = await this.jwtService.verifyAsync(
         refreshToken,
         {
-          secret: this.config.get('jwt.refreshTokenSecret'),
+          secret: this.config.get(JWTConfigEnum.REFRESH_TOKEN_SECRET),
           ignoreExpiration: false,
         },
       );
@@ -64,12 +65,12 @@ export class AuthService {
 
   async getTokens(payload: JwtPayload) {
     const accessToken = await this.jwtService.signAsync(payload, {
-      secret: this.config.get('jwt.accessTokenSecret'),
-      expiresIn: this.config.get('jwt.accessTokenExpiresIn'),
+      secret: this.config.get(JWTConfigEnum.ACCESS_TOKEN_SECRET),
+      expiresIn: this.config.get(JWTConfigEnum.ACCESS_TOKEN_EXPIRES_IN),
     });
     const refreshToken = await this.jwtService.signAsync(payload, {
-      secret: this.config.get('jwt.refreshTokenSecret'),
-      expiresIn: this.config.get('jwt.refreshTokenExpiresIn'),
+      secret: this.config.get(JWTConfigEnum.REFRESH_TOKEN_SECRET),
+      expiresIn: this.config.get(JWTConfigEnum.REFRESH_TOKEN_EXPIRES_IN),
     });
     return { accessToken, refreshToken };
   }

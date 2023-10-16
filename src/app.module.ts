@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import {
+  imageKitConfig,
   jwtConfig,
   mailerConfig,
   manualConfig,
-  postgressConfig,
+  postgresConfig,
 } from './configs';
 
 import { DistrictModule } from './modules/district/district.module';
@@ -18,11 +19,18 @@ import { MailModule } from './modules/mail/mail.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { ManualConfigEnum } from './configs/manual.config';
 import { APP_GUARD } from '@nestjs/core';
+import { FileUploadModule } from './modules/fileUpload/fileUpload.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [manualConfig, jwtConfig, postgressConfig, mailerConfig],
+      load: [
+        manualConfig,
+        jwtConfig,
+        postgresConfig,
+        mailerConfig,
+        imageKitConfig,
+      ],
     }),
     ThrottlerModule.forRootAsync({
       imports: [ConfigModule],
@@ -39,13 +47,14 @@ import { APP_GUARD } from '@nestjs/core';
     AuthModule,
     UserModule,
     MailModule,
+    FileUploadModule,
   ],
-  controllers: [],
   providers: [
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
   ],
+  controllers: [],
 })
 export class AppModule {}

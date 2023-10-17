@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ImageKitProvider } from './imageKit.provider';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ImageKitService } from './imageKit.service';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Module({
   imports: [ConfigModule],
-  providers: [ImageKitProvider, ConfigService],
-  exports: [ImageKitProvider],
+  providers: [ImageKitService, ConfigService, PrismaService],
+  exports: [ImageKitService],
 })
 export class ImageKitModule {}

@@ -56,7 +56,7 @@ export class OrderController {
   @UseGuards(JwtAccessAuthGuard, RolesGuard)
   @Get(OrderStatusEnum.canceled)
   findAllCanseled() {
-    return this.orderService.findAllCanseled();
+    return this.orderService.findAllCancelled();
   }
 
   @Roles(Role.Admin)

@@ -1,6 +1,17 @@
 import { Transform } from '@nestjs/class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
+export class BackgroundImage {
+  @ApiProperty()
+  id: string;
+
+  @ApiProperty()
+  fileId: string;
+
+  @ApiProperty()
+  url: string;
+}
+
 class NewsEntity {
   @ApiProperty()
   id: string;
@@ -12,7 +23,7 @@ class NewsEntity {
   content: string;
 
   @ApiProperty()
-  backgroundImage: string;
+  backgroundImage: BackgroundImage;
 
   @ApiProperty()
   authorId?: string;

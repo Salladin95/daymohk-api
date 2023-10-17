@@ -47,7 +47,7 @@ export class OrderService {
     });
   }
 
-  async findAllCanseled() {
+  async findAllCancelled() {
     return this.prismaService.order.findMany({
       where: { status: OrderStatusEnum.canceled },
     });

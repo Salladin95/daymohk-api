@@ -31,12 +31,18 @@ CREATE TABLE "News" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "content" TEXT NOT NULL,
-    "backgroundImage" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "authorId" TEXT,
 
     CONSTRAINT "News_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ImageKitFile" (
+    "url" TEXT NOT NULL,
+    "fileId" TEXT NOT NULL,
+    "newsId" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -87,8 +93,20 @@ CREATE TABLE "Order" (
 -- CreateIndex
 CREATE UNIQUE INDEX "User_login_key" ON "User"("login");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "ImageKitFile_url_key" ON "ImageKitFile"("url");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "ImageKitFile_fileId_key" ON "ImageKitFile"("fileId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "ImageKitFile_newsId_key" ON "ImageKitFile"("newsId");
+
 -- AddForeignKey
 ALTER TABLE "News" ADD CONSTRAINT "News_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ImageKitFile" ADD CONSTRAINT "ImageKitFile_newsId_fkey" FOREIGN KEY ("newsId") REFERENCES "News"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Order" ADD CONSTRAINT "Order_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "AccessibleDistrict"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

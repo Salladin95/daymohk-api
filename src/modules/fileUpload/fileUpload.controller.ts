@@ -4,6 +4,7 @@ import {
   Param,
   ParseFilePipeBuilder,
   ParseUUIDPipe,
+  Patch,
   Post,
   UploadedFile,
   UseGuards,
@@ -23,9 +24,9 @@ const maxFileSize = 15; //mb
 @UseGuards(JwtAccessAuthGuard, RolesGuard)
 @Controller('upload-file')
 export class FileUploadController {
-  constructor(private readonly fileUploadService: FileUploadService) {}
+  constructor(private readonly uploadService: FileUploadService) {}
 
-  @Post(':id')
+  @Post('news/:id')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
     @UploadedFile(
@@ -41,7 +42,25 @@ export class FileUploadController {
     file: Express.Multer.File,
     @Param('id', ParseUUIDPipe) id: string,
   ) {
-    // console.log(file);
-    await this.fileUploadService.uploadFile(file, id);
+    return this.uploadService.uploadNewsFile(file, id);
+  }
+
+  @Patch('news/:id')
+  @UseInterceptors(FileInterceptor('file'))
+  async updateFile(
+    @UploadedFile(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({
+          fileType: /(jpg|jpeg|png)$/,
+        })
+        .addMaxSizeValidator({ maxSize: megabytesToBytes(maxFileSize) })
+        .build({
+          errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+        }),
+    )
+    file: Express.Multer.File,
+    @Param('id', ParseUUIDPipe) id: string,
+  ) {
+    return this.uploadService.updateNewsFile(file, id);
   }
 }

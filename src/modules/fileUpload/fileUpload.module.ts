@@ -1,25 +1,25 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ManualConfigEnum } from '../../configs/manual.config';
 import { FileUploadController } from './fileUpload.controller';
 import { AuthModule } from '../auth/auth.module';
-import { FileUploadService } from './fileUpload.service';
 import { ImageKitModule } from '../imageKit/imageKit.module';
+import multer from 'multer';
+import { NewsModule } from '../news/news.module';
+import { PrismaService } from '../../prisma/prisma.service';
+import { FileUploadService } from './fileUpload.service';
 
 @Module({
   controllers: [FileUploadController],
   imports: [
     AuthModule,
     MulterModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        dest: configService.get<string>(ManualConfigEnum.MULTER_DEST),
+      useFactory: () => ({
+        storage: multer.memoryStorage(),
       }),
-      inject: [ConfigService],
     }),
     ImageKitModule,
+    NewsModule,
   ],
-  providers: [FileUploadService],
+  providers: [PrismaService, FileUploadService],
 })
 export class FileUploadModule {}

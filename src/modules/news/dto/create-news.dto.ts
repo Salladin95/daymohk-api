@@ -17,11 +17,6 @@ export class CreateNewsDto {
   @IsNotEmpty()
   content: string;
 
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  backgroundImage: string;
-
   @ApiPropertyOptional()
   @IsOptional()
   @IsUUID()

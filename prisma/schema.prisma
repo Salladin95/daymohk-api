@@ -24,23 +24,30 @@ enum Role {
 }
 
 model News {
-  id              String   @id @default(uuid())
+  id              String        @id @default(uuid())
   title           String
   content         String
-  backgroundImage String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  author          User?    @relation(fields: [authorId], references: [id])
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  author          User?         @relation(fields: [authorId], references: [id])
   authorId        String?
+  backgroundImage ImageKitFile?
+}
+
+model ImageKitFile {
+  url    String @unique
+  fileId String @unique
+  news   News   @relation(fields: [newsId], references: [id])
+  newsId String @unique
 }
 
 model Tariff {
-  id    String      @id @default(uuid())
-  title String
-  speed Int
-  cost  Int
-  type  TariffTypes
-  Order Order[]
+  id     String       @id @default(uuid())
+  title  String
+  speed  Int
+  cost   Int
+  type   TariffTypes
+  Order  Order[]
   status TariffStatus @default(active)
 }
 
@@ -49,17 +56,16 @@ enum TariffTypes {
   wireLess
 }
 
-
 enum TariffStatus {
   active
   archived
 }
 
 model AccessibleDistrict {
-  id       String  @id @default(uuid())
+  id    String  @id @default(uuid())
   title String
-  code String
-  Order    Order[]
+  code  String
+  Order Order[]
 }
 
 model Order {
@@ -82,9 +88,8 @@ model Order {
   tariff                    Tariff             @relation(fields: [tariffId], references: [id])
   tariffId                  String
   status                    OrderStatus        @default(active)
-  phoneNumber String
+  phoneNumber               String
 }
-
 
 enum OrderStatus {
   active

@@ -11,7 +11,6 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { SkipThrottle } from '@nestjs/throttler';
 import { Role, Roles } from '../../decorators';
 import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
 import { megabytesToBytes } from './utils/checkFile';
@@ -19,7 +18,6 @@ import { FileUploadService } from './fileUpload.service';
 
 const maxFileSize = 15; //mb
 
-@SkipThrottle()
 @Roles(Role.Admin)
 @UseGuards(JwtAccessAuthGuard, RolesGuard)
 @Controller('upload-file')

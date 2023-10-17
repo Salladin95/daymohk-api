@@ -11,11 +11,9 @@ import {
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { AuthService } from './auth.service';
 import { RefreshDto } from './dto/auth.dto';
-import { SkipThrottle } from '@nestjs/throttler';
 
-@SkipThrottle(false)
-@UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
+@UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

@@ -6,6 +6,7 @@ export type ManualConfigOptions = {
   throttleTtl: string;
   throttleLimit: string;
   dest: string;
+  origin: string;
 };
 
 export enum ManualConfigEnum {
@@ -14,6 +15,7 @@ export enum ManualConfigEnum {
   THROTTLE_TTL = 'manual.throttleTtl',
   THROTTLE_LIMIT = 'manual.throttleLimit',
   MULTER_DEST = 'manual.dest',
+  ORIGIN = 'manual.origin',
 }
 
 export default registerAs(
@@ -24,5 +26,6 @@ export default registerAs(
     throttleTtl: process.env.THROTTLE_TTL,
     throttleLimit: process.env.THROTTLE_LIMIT,
     dest: process.env.DEST,
+    origin: process.env.ORIGIN,
   }),
 );

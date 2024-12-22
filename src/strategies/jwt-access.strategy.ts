@@ -19,6 +19,7 @@ export class JwtAccessStrategy extends PassportStrategy(
   }
 
   async validate({ userId, login, roles }: JwtPayload) {
+    console.log('Validating access token:', { userId, login, roles });
     return { userId, login, roles };
   }
 }

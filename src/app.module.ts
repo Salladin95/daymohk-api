@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import {
@@ -20,6 +20,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { ManualConfigEnum } from './configs/manual.config';
 import { APP_GUARD } from '@nestjs/core';
 import { FileUploadModule } from './modules/fileUpload/fileUpload.module';
+import { LoggerMiddleware } from './utils/logger.middleware';
 
 @Module({
   imports: [
@@ -57,4 +58,10 @@ import { FileUploadModule } from './modules/fileUpload/fileUpload.module';
   ],
   controllers: [],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}

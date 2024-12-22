@@ -25,7 +25,7 @@ export class OrderService {
       data: createOrderDto,
     });
     this.mailService.sendMessage({
-      subject: 'TITLE',
+      subject: 'Новый заказ',
       text: `Поступил новый заказ от ${createdOrder.personalName}`,
     });
     return createdOrder;

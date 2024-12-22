@@ -46,7 +46,9 @@ export class NewsService {
 
   async remove(id: string) {
     const news = await this.findOne(id);
-    await this.imageKit.removeFile(news.backgroundImage.fileId);
+    if (news.backgroundImage) {
+      await this.imageKit.removeFile(news.backgroundImage.fileId);
+    }
     return this.prisma.news.delete({ where: { id } });
   }
 }

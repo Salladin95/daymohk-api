@@ -11,20 +11,20 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Role, Roles } from '../../decorators';
-import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
+import { Role, Roles } from 'src/decorators';
+import { JwtAccessAuthGuard, RolesGuard } from 'src/guards';
 import { megabytesToBytes } from './utils/checkFile';
 import { FileUploadService } from './fileUpload.service';
 
 const maxFileSize = 15; //mb
 
-@Roles(Role.Admin)
-@UseGuards(JwtAccessAuthGuard, RolesGuard)
-@Controller('upload-file')
+@Controller('upload-file/news')
 export class FileUploadController {
   constructor(private readonly uploadService: FileUploadService) {}
 
-  @Post('news/:id')
+  @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
+  @Post('/:id')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
     @UploadedFile(
@@ -43,7 +43,9 @@ export class FileUploadController {
     return this.uploadService.uploadNewsFile(file, id);
   }
 
-  @Patch('news/:id')
+  @Roles(Role.Admin)
+  @UseGuards(JwtAccessAuthGuard, RolesGuard)
+  @Patch('/:id')
   @UseInterceptors(FileInterceptor('file'))
   async updateFile(
     @UploadedFile(

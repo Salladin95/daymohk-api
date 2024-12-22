@@ -14,7 +14,7 @@ import { NewsService } from './news.service';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { Role, Roles } from 'src/decorators';
-import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
+import { JwtAccessAuthGuard, RolesGuard } from 'src/guards';
 
 @Controller('news')
 export class NewsController {

@@ -14,7 +14,7 @@ export enum MailerConfigEnum {
   TO = 'mailer.to',
 }
 
-export default registerAs(
+export const mailerConfig = registerAs(
   'mailer',
   (): MailerConfigOptions => ({
     admin: process.env.MAILER_ADMIN,

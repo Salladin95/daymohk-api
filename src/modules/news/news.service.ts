@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { PrismaService } from 'src/prisma/prisma.service';
-import getNotFoundMsg from 'src/utils/getNotFoundMsg';
+import { PrismaService } from '~/prisma';
+import { getNotFoundMsg } from '~/utils';
+import { ImageKitService } from '~/modules/imageKit';
+
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
-import { ImageKitService } from '../imageKit/imageKit.service';
 
 @Injectable()
 export class NewsService {

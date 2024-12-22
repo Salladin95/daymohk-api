@@ -1,13 +1,5 @@
-const notFoundMsg = 'User not found';
-const userAlreadyExistMsg = 'User already exists';
-const passwordsDontMatchMsg = 'Passwords don"t match';
-const userNotExist = 'User with such a login doesn"t exist';
-const invalidTokenMsg = 'Invalid token';
-
-export {
-  invalidTokenMsg,
-  notFoundMsg,
-  passwordsDontMatchMsg,
-  userAlreadyExistMsg,
-  userNotExist,
-};
+export const notFoundMsg = 'User not found';
+export const userAlreadyExistMsg = 'User already exists';
+export const passwordsDontMatchMsg = 'Passwords don"t match';
+export const userNotExist = 'User with such a login doesn"t exist';
+export const invalidTokenMsg = 'Invalid token';

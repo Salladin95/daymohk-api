@@ -1,11 +1,11 @@
 import { json, urlencoded } from 'express';
 import { ConfigService } from '@nestjs/config';
-import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 
-import { AppModule } from './app.module';
-import { ManualConfigEnum } from './configs/manual.config';
-import { PrismaClientExceptionFilter } from './prisma-client-exception/prisma-client-exception.filter';
+import { AppModule } from '~/app.module';
+import { ManualConfigEnum } from '~/configs';
+import { PrismaClientExceptionFilter } from '~/prisma-client-exception/prisma-client-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

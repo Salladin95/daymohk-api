@@ -1,5 +1,7 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 
 import {
   imageKitConfig,
@@ -9,18 +11,16 @@ import {
   postgresConfig,
 } from './configs';
 
-import { DistrictModule } from './modules/district/district.module';
-import { NewsModule } from './modules/news/news.module';
-import { OrderModule } from './modules/order/order.module';
-import { TariffModule } from './modules/tariff/tariff.module';
-import { AuthModule } from './modules/auth/auth.module';
-import { UserModule } from './modules/user/user.module';
-import { MailModule } from './modules/mail/mail.module';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { ManualConfigEnum } from './configs/manual.config';
-import { APP_GUARD } from '@nestjs/core';
-import { FileUploadModule } from './modules/fileUpload/fileUpload.module';
-import { LoggerMiddleware } from './utils/logger.middleware';
+import { AuthModule } from '~/modules/auth';
+import { NewsModule } from '~/modules/news';
+import { UserModule } from '~/modules/user';
+import { MailModule } from '~/modules/mail';
+import { ManualConfigEnum } from '~/configs';
+import { OrderModule } from '~/modules/order';
+import { TariffModule } from '~/modules/tariff';
+import { LoggerMiddleware } from '~/middlewares';
+import { DistrictModule } from '~/modules/district';
+import { FileUploadModule } from '~/modules/fileUpload';
 
 @Module({
   imports: [

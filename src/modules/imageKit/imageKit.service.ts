@@ -1,9 +1,10 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
 import ImageKit from 'imagekit';
 import { ConfigService } from '@nestjs/config';
-import { ImageKitConfigEnum } from '../../configs';
+import { BadRequestException, Injectable } from '@nestjs/common';
+
+import { PrismaService } from '~/prisma';
+import { ImageKitConfigEnum } from '~/configs';
 import { retrieveFileExtension } from './utils';
-import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class ImageKitService {

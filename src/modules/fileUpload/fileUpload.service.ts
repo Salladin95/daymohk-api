@@ -1,7 +1,8 @@
-import { ImageKitService } from '../imageKit/imageKit.service';
-import { NewsService } from '../news/news.service';
-import { PrismaService } from '../../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
+
+import { NewsService } from '~/modules/news';
+import { ImageKitService } from '~/modules/imageKit';
+import { PrismaService } from '~/prisma/prisma.service';
 
 @Injectable()
 export class FileUploadService {

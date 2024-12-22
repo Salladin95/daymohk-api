@@ -5,6 +5,7 @@ export const retrieveFileExtension = (filename: string): string => {
   }
   return parts[parts.length - 1];
 };
+
 export const toBase64 = (file: File | Blob | string): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();

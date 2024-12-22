@@ -1,4 +1,2 @@
-import { Role } from './role.enum';
-import { Roles, ROLES_KEY } from './roles.decorator';
-
-export { Role, Roles, ROLES_KEY };
+export * from './role.enum';
+export * from './roles.decorator';

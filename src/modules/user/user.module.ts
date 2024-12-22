@@ -1,10 +1,11 @@
 import { forwardRef, Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+
+import { PrismaService } from '~/prisma';
+import { AuthModule } from '~/modules/auth';
 
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { ConfigModule } from '@nestjs/config';
-import { AuthModule } from '../auth/auth.module';
 
 @Module({
   controllers: [UserController],

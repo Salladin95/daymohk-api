@@ -16,7 +16,7 @@ export enum JWTConfigEnum {
   REFRESH_TOKEN_EXPIRES_IN = 'jwt.refreshTokenExpiresIn',
 }
 
-export default registerAs(
+export const jwtConfig = registerAs(
   'jwt',
   (): JwtConfigOptions => ({
     salt: parseInt(process.env.SALT, 10),

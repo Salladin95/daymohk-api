@@ -1,22 +1,5 @@
-import jwtConfig, { JwtConfigOptions } from './jwt.config';
-import manualConfig, { ManualConfigOptions } from './manual.config';
-import postgresConfig, { PostgresConfigOptions } from './postgress.config';
-import mailerConfig, { MailerConfigOptions } from './mailer.config';
-import imageKitConfig, {
-  ImageKitConfigEnum,
-  imageKitOptions,
-} from './imageKit.config';
-
-export {
-  imageKitConfig,
-  ImageKitConfigEnum,
-  imageKitOptions,
-  jwtConfig,
-  JwtConfigOptions,
-  mailerConfig,
-  MailerConfigOptions,
-  manualConfig,
-  ManualConfigOptions,
-  PostgresConfigOptions,
-  postgresConfig,
-};
+export * from './jwt.config';
+export * from './manual.config';
+export * from './postgres.config';
+export * from './mailer.config';
+export * from './imageKit.config';

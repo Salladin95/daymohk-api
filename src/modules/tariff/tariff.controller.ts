@@ -10,11 +10,13 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
+
+import { Role, Roles } from '~/decorators';
+import { JwtAccessAuthGuard, RolesGuard } from '~/guards';
+
 import { TariffService } from './tariff.service';
 import { CreateTariffDto } from './dto/create-tariff.dto';
 import { UpdateTariffDto } from './dto/update-tariff.dto';
-import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
-import { Role, Roles } from 'src/decorators';
 
 @Controller('tariff')
 export class TariffController {

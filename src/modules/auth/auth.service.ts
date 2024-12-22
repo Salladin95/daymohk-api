@@ -10,13 +10,14 @@ import {
   invalidTokenMsg,
   passwordsDontMatchMsg,
   userNotExist,
-} from 'src/utils/messages';
-import { checkPassword } from 'src/utils/bcrypt';
-import { UserService } from '../user/user.service';
-import { JwtPayload } from './contracts.auth';
+  checkPassword,
+} from '~/utils';
+import { UserService } from '~/modules/user';
+import { JWTConfigEnum } from '~/configs';
+import { JwtPayload } from '~/contracts';
+
 import { RefreshDto } from './dto/auth.dto';
 import { LoginDto } from './dto/login.dto';
-import { JWTConfigEnum } from '../../configs/jwt.config';
 
 @Injectable()
 export class AuthService {

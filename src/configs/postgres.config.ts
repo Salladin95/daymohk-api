@@ -10,17 +10,17 @@ export type PostgresConfigOptions = {
   url: string;
 };
 
-export enum PostgressConfigEnum {
-  PORT = 'postgress.port',
-  URL = 'postgress.baseURL',
-  DB = 'postgress.db',
-  PASSWORD = 'postgress.password',
-  LOGIN = 'postgress.login',
-  USER = 'postgress.user',
+export enum PostgresConfigEnum {
+  PORT = 'postgres.port',
+  URL = 'postgres.baseURL',
+  DB = 'postgres.db',
+  PASSWORD = 'postgres.password',
+  LOGIN = 'postgres.login',
+  USER = 'postgres.user',
 }
 
-export default registerAs(
-  'postgress',
+export const postgresConfig = registerAs(
+  'postgres',
   (): PostgresConfigOptions => ({
     port: parseInt(process.env.POSTGRES_PORT, 10),
     url: process.env.POSTGRES_URL,

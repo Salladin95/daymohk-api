@@ -12,15 +12,16 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { SkipThrottle } from '@nestjs/throttler';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+
+import { Role, Roles } from '~/decorators';
+import { JwtAccessAuthGuard, RolesGuard } from '~/guards';
 
 import { UserService } from './user.service';
+import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { User } from './entities/user.entity';
-import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
-import { Role, Roles } from 'src/decorators';
-import { SkipThrottle } from '@nestjs/throttler';
 
 @SkipThrottle()
 @ApiTags('user')

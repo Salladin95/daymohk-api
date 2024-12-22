@@ -1,8 +1,9 @@
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { JWTConfigEnum } from 'src/configs/jwt.config';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import { PassportStrategy } from '@nestjs/passport';
+
+import { JWTConfigEnum } from '~/configs';
 
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(

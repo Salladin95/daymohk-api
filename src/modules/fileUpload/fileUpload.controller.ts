@@ -11,32 +11,32 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Role, Roles } from 'src/decorators';
-import { JwtAccessAuthGuard, RolesGuard } from 'src/guards';
+
+import { Role, Roles } from '~/decorators';
+import { JwtAccessAuthGuard, RolesGuard } from '~/guards';
+
 import { megabytesToBytes } from './utils/checkFile';
 import { FileUploadService } from './fileUpload.service';
 
 const maxFileSize = 15; //mb
 
-@Controller('upload-file/news')
+@Controller('upload-file')
 export class FileUploadController {
   constructor(private readonly uploadService: FileUploadService) {}
 
+  private static readonly fileValidationPipe = new ParseFilePipeBuilder()
+    .addFileTypeValidator({ fileType: /(jpg|jpeg|png)$/ })
+    .addMaxSizeValidator({ maxSize: megabytesToBytes(maxFileSize) })
+    .build({
+      errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+    });
+
   @Roles(Role.Admin)
   @UseGuards(JwtAccessAuthGuard, RolesGuard)
-  @Post('/:id')
+  @Post('/news/:id')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
-    @UploadedFile(
-      new ParseFilePipeBuilder()
-        .addFileTypeValidator({
-          fileType: /(jpg|jpeg|png)$/,
-        })
-        .addMaxSizeValidator({ maxSize: megabytesToBytes(maxFileSize) })
-        .build({
-          errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
-        }),
-    )
+    @UploadedFile(FileUploadController.fileValidationPipe)
     file: Express.Multer.File,
     @Param('id', ParseUUIDPipe) id: string,
   ) {
@@ -45,19 +45,10 @@ export class FileUploadController {
 
   @Roles(Role.Admin)
   @UseGuards(JwtAccessAuthGuard, RolesGuard)
-  @Patch('/:id')
+  @Patch('/news/:id')
   @UseInterceptors(FileInterceptor('file'))
   async updateFile(
-    @UploadedFile(
-      new ParseFilePipeBuilder()
-        .addFileTypeValidator({
-          fileType: /(jpg|jpeg|png)$/,
-        })
-        .addMaxSizeValidator({ maxSize: megabytesToBytes(maxFileSize) })
-        .build({
-          errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
-        }),
-    )
+    @UploadedFile(FileUploadController.fileValidationPipe)
     file: Express.Multer.File,
     @Param('id', ParseUUIDPipe) id: string,
   ) {

@@ -8,7 +8,8 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 
-import { CreateUserDto } from '../user/dto/create-user.dto';
+import { CreateUserDto } from '~/modules/user/dto';
+
 import { AuthService } from './auth.service';
 import { RefreshDto } from './dto/auth.dto';
 

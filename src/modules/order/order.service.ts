@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { PrismaService } from 'src/prisma/prisma.service';
-import getNotFoundMsg from 'src/utils/getNotFoundMsg';
-import { DistrictService } from '../district/district.service';
-import { MailService } from '../mail/mail.service';
-import { TariffService } from '../tariff/tariff.service';
+import { PrismaService } from '~/prisma';
+import { getNotFoundMsg } from '~/utils';
+import { MailService } from '~/modules/mail';
+import { TariffService } from '~/modules/tariff';
+import { DistrictService } from '~/modules/district';
+
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { OrderStatusEnum } from './order.contracts';

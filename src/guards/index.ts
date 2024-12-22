@@ -1,5 +1,3 @@
-import { JwtAccessAuthGuard } from './accessToken.guard';
-import { JwtRefreshAuthGuard } from './refreshToken.guard';
-import RolesGuard from './roles.guard';
-
-export { JwtAccessAuthGuard, JwtRefreshAuthGuard, RolesGuard };
+export * from './accessToken.guard';
+export * from './refreshToken.guard';
+export * from './roles.guard';

@@ -5,14 +5,14 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { User } from '@prisma/client';
+import { ConfigService } from '@nestjs/config';
+
+import { JWTConfigEnum } from '~/configs';
+import { passwordsDontMatchMsg, checkPassword, encodePassword } from '~/utils';
 
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User as UserEntity } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
-import { checkPassword, encodePassword } from 'src/utils/bcrypt';
-import { ConfigService } from '@nestjs/config';
-import { JWTConfigEnum } from 'src/configs/jwt.config';
-import { passwordsDontMatchMsg } from 'src/utils/messages';
+import { User as UserEntity } from './entities/user.entity';
 
 @Injectable()
 export class UserService {

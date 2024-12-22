@@ -18,7 +18,7 @@ export enum ManualConfigEnum {
   ORIGIN = 'manual.origin',
 }
 
-export default registerAs(
+export const manualConfig = registerAs(
   'manual',
   (): ManualConfigOptions => ({
     port: parseInt(process.env.PORT, 10) || 4000,

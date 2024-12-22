@@ -12,12 +12,14 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+
+import { Role, Roles } from '~/decorators';
+import { JwtAccessAuthGuard, RolesGuard } from '~/guards';
+
 import { OrderService } from './order.service';
+import { OrderStatusEnum } from './order.contracts';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { OrderStatusEnum } from './order.contracts';
-import { JwtAccessAuthGuard, RolesGuard } from '../../guards';
-import { Role, Roles } from 'src/decorators';
 
 @Controller('order')
 export class OrderController {

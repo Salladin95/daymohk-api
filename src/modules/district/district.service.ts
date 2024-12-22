@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { PrismaService } from 'src/prisma/prisma.service';
-import getNotFoundMsg from 'src/utils/getNotFoundMsg';
+import { PrismaService } from '~/prisma';
+import { getNotFoundMsg } from '~/utils';
+
 import { CreateDistrictDto } from './dto/create-district.dto';
 import { UpdateDistrictDto } from './dto/update-district.dto';
 

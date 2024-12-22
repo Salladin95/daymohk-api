@@ -12,7 +12,7 @@ export enum ImageKitConfigEnum {
   URL = 'imageKit.url',
 }
 
-export default registerAs(
+export const imageKitConfig = registerAs(
   'imageKit',
   (): imageKitOptions => ({
     privateKey: process.env.IMAGE_KIT_PRIVATE_KEY,

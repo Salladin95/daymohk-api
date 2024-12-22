@@ -1,12 +1,14 @@
+import multer from 'multer';
 import { Module } from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
-import { FileUploadController } from './fileUpload.controller';
-import { AuthModule } from '../auth/auth.module';
-import { ImageKitModule } from '../imageKit/imageKit.module';
-import multer from 'multer';
-import { NewsModule } from '../news/news.module';
-import { PrismaService } from '../../prisma/prisma.service';
+
+import { PrismaService } from '~/prisma';
+import { AuthModule } from '~/modules/auth';
+import { NewsModule } from '~/modules/news';
+import { ImageKitModule } from '~/modules/imageKit';
+
 import { FileUploadService } from './fileUpload.service';
+import { FileUploadController } from './fileUpload.controller';
 
 @Module({
   controllers: [FileUploadController],
